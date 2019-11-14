@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import Card from '../UI/Card';
+import LoadingIndicator from '../UI/LoadingIndicator';
 import './IngredientForm.css';
 
 const IngredientForm = React.memo(props => {
@@ -9,7 +10,7 @@ const IngredientForm = React.memo(props => {
 
   const submitHandler = event => {
     event.preventDefault();
-    props.onAddIngredient({title: enteredTitle, amount : enteredAmount});
+    props.onAddIngredient({ title: enteredTitle, amount: enteredAmount });
   };
 
   return (
@@ -18,11 +19,11 @@ const IngredientForm = React.memo(props => {
         <form onSubmit={submitHandler}>
           <div className="form-control">
             <label htmlFor="title">Name</label>
-            <input type="text" id="title" 
-                   value={enteredTitle}
-                   onChange={event => {
-                      setEnterdTitle(event.target.value);
-                      }} 
+            <input type="text" id="title"
+              value={enteredTitle}
+              onChange={event => {
+                setEnterdTitle(event.target.value);
+              }}
             />
           </div>
           <div className="form-control">
@@ -31,11 +32,12 @@ const IngredientForm = React.memo(props => {
               value={enteredAmount}
               onChange={event => {
                 setEnteredAmount(event.target.value);
-              }} 
+              }}
             />
           </div>
           <div className="ingredient-form__actions">
             <button type="submit">Add Ingredient</button>
+            {props.loading && <LoadingIndicator />}
           </div>
         </form>
       </Card>
